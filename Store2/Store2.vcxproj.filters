@@ -33,9 +33,6 @@
     <ClCompile Include="Store2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Store\Store\Authorization.cpp">
-      <Filter>Source Files\Authorization</Filter>
-    </ClCompile>
     <ClCompile Include="Product.cpp">
       <Filter>Source Files\Product</Filter>
     </ClCompile>
@@ -47,6 +44,9 @@
     </ClCompile>
     <ClCompile Include="products.txt">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Authorization.cpp">
+      <Filter>Source Files\Authorization</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

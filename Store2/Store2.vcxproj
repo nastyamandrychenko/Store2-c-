@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Store\Store\Authorization.cpp" />
+    <ClCompile Include="Authorization.cpp" />
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="Product.cpp" />
     <ClCompile Include="products.txt" />
