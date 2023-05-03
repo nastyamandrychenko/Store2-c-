@@ -130,7 +130,10 @@
     <ClCompile Include="Authorization.cpp" />
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="Product.cpp" />
-    <ClCompile Include="products.txt" />
+    <Resource Include="products.txt">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </Resource>
     <ClCompile Include="Store2.cpp" />
     <ClCompile Include="Television.cpp" />
   </ItemGroup>

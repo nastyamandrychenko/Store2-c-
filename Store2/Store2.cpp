@@ -98,7 +98,7 @@ int main()
     cout << "How many products do you want to add? ";
     int numProducts;
     cin >> numProducts;
-    ofstream outFile("products.txt");
+    ofstream outFile("products.txt", ios_base::app);
 
     int whatType;
     cout << "What type of product do you want to add?" << endl <<"1.Television"<< endl << "2.Phone"<<endl;
@@ -152,7 +152,7 @@ int main()
             store.addItem(p);
         }
    }
-  
+    outFile.close();
  
 
     /*store.printProducts();*/
