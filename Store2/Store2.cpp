@@ -99,6 +99,7 @@ int main()
     int numProducts;
     cin >> numProducts;
     ofstream outFile("products.txt");
+
     int whatType;
     cout << "What type of product do you want to add?" << endl <<"1.Television"<< endl << "2.Phone"<<endl;
     cin >> whatType;
