@@ -71,13 +71,6 @@ using namespace std;
 //};
 
 void check(string &str) {
-   /* if (str.find_first_not_of("0123456789") == string::npos) {
-        cout << "The value " << str << " is Integer" << endl;
-    }
-    else {
-        cout << "The value " << str << " is Not Integer" << endl;
-    }*/
-
     while (str.find_first_not_of("0123456789") != string::npos) {
         cout << "Not integer!";
         cin >> str;
@@ -85,7 +78,39 @@ void check(string &str) {
    
 };
 
-vector<Product*> products;
+vector<Television*> readTelevisionData(const string& filename) {
+    ifstream televisionRead(filename);
+    if (!televisionRead.is_open()) {
+        cout << "Error opening file!" << endl;
+    }
+    int numObjects = 0;
+    string line;
+    while (getline(televisionRead, line)) {
+        ++numObjects;
+    };
+    televisionRead.clear();
+    televisionRead.seekg(0, ios::beg);
+    vector<Television*> productsTel(numObjects);
+    for (int i = 0; i < numObjects; ++i) {
+        string name;
+        string price;
+        string description;
+        string model;
+        string screenSize;
+        getline(televisionRead, name, ' ');
+        getline(televisionRead, price, ' ');
+        getline(televisionRead, description, ' ');
+        getline(televisionRead, model, ' ');
+        getline(televisionRead, screenSize);
+
+        productsTel[i] = new Television(name, price, description, model, screenSize);
+    }
+
+    televisionRead.close();
+
+    return productsTel;
+};
+
 
 int main()
 {
@@ -207,42 +232,11 @@ int main()
         }
         PhonesFile.close();
    }
+    vector<Television*> televisions = readTelevisionData("television.txt");
 
+    
 
-    ifstream televisionRead("television.txt");
-    if (!televisionRead.is_open()) {
-        cout << "Error opening file!" << endl;
-    }
-    int numObjects = 0;
-    string line;
-    while (getline(televisionRead, line)) {
-        ++numObjects;
-    };
-    televisionRead.clear();
-    televisionRead.seekg(0, ios::beg);
-    vector<Television*> productsTel(numObjects);
-    for (int i = 0; i < numObjects; ++i) {
-        string name;
-        string price;
-        string description;
-        string model;
-        string screenSize;
-        getline(televisionRead, name, ' ');
-        getline(televisionRead, price, ' ');
-        getline(televisionRead, description, ' ');
-        getline(televisionRead, model, ' ');
-        getline(televisionRead, screenSize);
-
-        productsTel[i] = new Television(name, price, description, model, screenSize);
-    }
-
-    televisionRead.close();
-
-    /*for (int i = 0; i < numObjects; i++) {
-        cout << productsTel[i]->getName() << productsTel[i]->getPrice() << productsTel[i]->getDescription() << "\n";
-    };*/
-
-    for (const auto& product : productsTel) {
+    for (const auto& product : televisions) {
         cout << "Name: " << product->getName() << endl;
         cout << "Price: " << product->getPrice() << endl;
         cout << "Description: " << product->getDescription() << endl;
@@ -250,8 +244,8 @@ int main()
         cout << "Screen Size: " << product->getScreenSize() << endl;
     }
 
-    for (int i = 0; i < numObjects; ++i) {
-        delete productsTel[i];
+    for (Television* tv : televisions) {
+        delete tv;
     }
    /* store.printProducts();*/
 }
