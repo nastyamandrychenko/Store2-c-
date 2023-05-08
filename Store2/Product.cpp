@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-Product::Product(string name, double price, string description, string model) {
+Product::Product(string name, string price, string description, string model) {
     this->name = name;
     this->price = price;
     this->description = description;
@@ -19,9 +19,9 @@ string Product::getDescription() { return description; };
 
 string Product:: getModel() { return model; };
 
-double Product:: getPrice() { return price; };
+string Product:: getPrice() { return price; };
 
-void Product::setPrice(double price) {
+void Product::setPrice(string price) {
     this->price = price;
 };
 

@@ -8,12 +8,12 @@ using namespace std;
 
 class Phone : public Product {
 private:
-    int cameraQuality;
+    string cameraQuality;
 public:
-    Phone(string name, double price, string description, string model, int cameraQuality);
+    Phone(string name, string price, string description, string model, string cameraQuality);
     Phone();
     void writeToStream(ostream& out) const override;
-    int getcameraQuality();
-    void setcameraQuality(int cameraQ);
+    string getcameraQuality();
+    void setcameraQuality(string cameraQ);
 };
 #endif

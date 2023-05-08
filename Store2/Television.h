@@ -10,7 +10,7 @@ class Television : public Product {
 private:
     string screenSize;
 public:
-    Television(string name, double price, string description, string model, string screenSize);
+    Television(string name, string price, string description, string model, string screenSize);
     Television();
     void writeToStream(ostream& out) const override;
     string getScreenSize();
