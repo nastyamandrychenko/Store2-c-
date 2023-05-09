@@ -78,8 +78,8 @@ void check(string &str) {
    
 };
 
-vector<Television*> readTelevisionData(const string& filename) {
-    ifstream televisionRead(filename);
+vector<Television*> readTelevisionData() {
+    ifstream televisionRead("television.txt");
     if (!televisionRead.is_open()) {
         cout << "Error opening file!" << endl;
     }
@@ -111,6 +111,80 @@ vector<Television*> readTelevisionData(const string& filename) {
     return productsTel;
 };
 
+void deleteProductFromFile(const string& filename, int lineToDelete) {
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error opening file: " << filename << endl;
+        return;
+    }
+
+    vector<string> lines; // is used to store the lines of the file that are not to be deleted
+    string line;
+    int lineNumber = 1;
+    while (getline(file, line)) {
+        if (lineNumber != lineToDelete) {
+            lines.push_back(line);
+        };
+        lineNumber++;
+    };
+    file.close();
+
+    // Clear the file
+    ofstream clearFile(filename, ofstream::out | ofstream::trunc);
+    if (!clearFile) {
+        cerr << "Error opening file for writing: " << filename << endl;
+        return;
+    };
+    clearFile.close();
+    // Write the modified content back to the file
+    ofstream backToFile(filename, ios_base::app);
+    if (!backToFile) {
+        cerr << "Error opening file for writing: " << filename << endl;
+        return;
+    }
+    for (const string& modifiedLine : lines) {
+        backToFile << modifiedLine << std::endl;
+    }
+    backToFile.close();
+};
+
+
+
+//std::vector<Television*> readTelevisionData(const std::string& filename) {
+//    std::ifstream televisionRead(filename);
+//    if (!televisionRead.is_open()) {
+//        std::cout << "Error opening file!" << std::endl;
+//        return {};
+//    }
+//
+//    std::vector<Television*> productsTel;
+//
+//    std::string name;
+//    std::string price;
+//    std::string description;
+//    std::string model;
+//    std::string screenSize;
+//
+//    while (televisionRead >> name >> price >> description >> model >> screenSize) {
+//        bool exists = false;
+//        for ( Television* tv : productsTel) {
+//            if (tv->getName() == name && tv->getPrice() == price && tv->getDescription() == description &&
+//                tv->getModel() == model && tv->getScreenSize() == screenSize) {
+//                exists = true;
+//                break;
+//            }
+//        }
+//
+//        if (!exists) {
+//            Television* tv = new Television(name, price, description, model, screenSize);
+//            productsTel.push_back(tv);
+//        }
+//    }
+//
+//    televisionRead.close();
+//
+//    return productsTel;
+//}
 
 int main()
 {
@@ -185,7 +259,6 @@ int main()
             t.setPrice(price);
             t.setScreenSize(screenSize);
             t.writeToStream(TelevisionFile);
-            /*store.addItem(t);*/
             
         }
         TelevisionFile.close();
@@ -226,17 +299,52 @@ int main()
             p.setPrice(price);
             p.setcameraQuality(cameraQ);
             p.writeToStream(PhonesFile);
-          /*  store.addItem(p);*/
             
           
         }
         PhonesFile.close();
    }
-    vector<Television*> televisions = readTelevisionData("television.txt");
 
-    
+    ofstream TelevisionFile("television.txt", ios_base::app);
+    for (int i = 0; i < 1; i++) {
+        string name;
+        string price;
+        string description;
+        string model;
+        string screenSize;
 
-    for (const auto& product : televisions) {
+        cout << "Enter the name of " << i + 1 << " product " << ": ";
+        cin.ignore();
+        cin >> name;
+
+        cout << "Enter the price of " << i + 1 << " product " << ": ";
+        cin.ignore();
+        cin >> price;
+        cout << "Enter the description of " << i + 1 << " product " << ": ";
+        cin.ignore();
+        cin >> description;
+        cout << "Enter the model of " << i + 1 << " product " << ": ";
+        cin.ignore();
+        cin >> model;
+        cout << "Enter the screen size of " << i + 1 << " product " << ": ";
+        cin.ignore();
+        cin >> screenSize;
+
+        t.setDescription(description);
+        t.setModel(model);
+        t.setName(name);
+        t.setPrice(price);
+        t.setScreenSize(screenSize);
+        t.writeToStream(TelevisionFile);
+
+    }
+    TelevisionFile.close();
+
+    deleteProductFromFile("television.txt", 1);
+
+    vector<Television*> television = readTelevisionData();
+
+    for (const auto& product : television) {
         cout << "Name: " << product->getName() << endl;
         cout << "Price: " << product->getPrice() << endl;
         cout << "Description: " << product->getDescription() << endl;
@@ -244,7 +352,7 @@ int main()
         cout << "Screen Size: " << product->getScreenSize() << endl;
     }
 
-    for (Television* tv : televisions) {
+    for (Television* tv : television) {
         delete tv;
     }
    /* store.printProducts();*/
