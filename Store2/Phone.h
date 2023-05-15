@@ -15,5 +15,7 @@ public:
     void writeToStream(ostream& out) const override;
     string getcameraQuality();
     void setcameraQuality(string cameraQ);
+    string getAdditionalAttribute() const override;
+    void setAdditionalAttribute(const string& attributeValue) override;
 };
 #endif

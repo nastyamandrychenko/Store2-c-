@@ -23,6 +23,9 @@ public:
     void setName(string name);
     void setDescription(string description);
     void setModel(string model);
+
+    virtual string getAdditionalAttribute() const = 0;
+    virtual void setAdditionalAttribute(const string& attributeValue) = 0;
 };
 
 #endif

@@ -11,7 +11,7 @@ Product::Product(string name, string price, string description, string model) {
 Product::Product() {};
 
 void Product::writeToStream(ostream& out) const {
-    out << name << " " << price << " " << description << " " << model << endl;
+    out << name << "," << price << "," << description << "," << model << endl;
 };
 string Product::getName() { return name; };
 
@@ -34,3 +34,4 @@ void Product::setDescription(string description) {
 void Product::setModel(string model) {
     this->model = model;
 };
+
