@@ -14,6 +14,7 @@ using namespace std;
 void check(string &str) {
     while (str.find_first_not_of("0123456789") != string::npos) {
         cout << "Not integer!";
+        cin.ignore();
         cin >> str;
     };
    
@@ -144,152 +145,6 @@ void writeData(const vector<T*>& products, const string& filename) {
 
 int main()
 {
-    //    string password, userName;
-    //    cout << "User name:" << endl;
-    //    cin >> userName;
-    //    cout << "Password:" << endl;
-    //    cin >> password;
-    //    Authorization logIn(password, userName);
-
-        /* if (logIn.checkLogIn(userName, password) == true) {
-             cout << "Login was successful!";
-         } else{
-             cout << "Wrong password or username! Try again!";
-         }*/
-
-         //cout << "User name: " << logIn.getUserName() << endl << "Password: " << logIn.getPassword() << endl;
-
-        /* StoreProducts store;*/
-       /*  cout << "How many products do you want to add? ";
-         int numProducts;
-         cin >> numProducts;*/
-
-         /*  Television t;
-           Phone p;
-           int whatType;
-           cout << "What type of product do you want to add?" << endl <<"1.Television"<< endl << "2.Phone"<<endl;
-           cin >> whatType;
-
-
-
-           if (whatType == 1) {
-
-               ofstream TelevisionFile("television.txt", ios_base::app);
-               for (int i = 0; i < numProducts; i++) {
-                   string name;
-                   string price;
-                   string description;
-                   string model;
-                   string screenSize;
-
-                   cout << "Enter the name of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> name;
-
-                   cout << "Enter the price of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> price;
-                   cout << "Enter the description of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> description;
-                   cout << "Enter the model of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> model;
-                   cout << "Enter the screen size of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> screenSize;
-
-                   t.setDescription(description);
-                   t.setModel(model);
-                   t.setName(name);
-                   t.setPrice(price);
-                   t.setScreenSize(screenSize);
-                   t.writeToStream(TelevisionFile);
-
-               }
-               TelevisionFile.close();
-           }
-           else if (whatType == 2) {
-
-               ofstream PhonesFile("phones.txt", ios_base::app);
-               for (int i = 0; i < numProducts; i++) {
-                   string name;
-                   string price;
-                   string description;
-                   string model;
-                   string cameraQ;
-
-                   cout << "Enter the name of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> name;
-
-                   cout << "Enter the price of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> price;
-                   cout << "Enter the description of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> description;
-                   cout << "Enter the model of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> model;
-                   cout << "Enter the camera quality of " << i + 1 << " product " << ": ";
-                   cin.ignore();
-                   cin >> cameraQ;
-                   check(cameraQ);
-
-
-
-                   p.setDescription(description);
-                   p.setModel(model);
-                   p.setName(name);
-                   p.setPrice(price);
-                   p.setcameraQuality(cameraQ);
-                   p.writeToStream(PhonesFile);
-
-
-               }
-               PhonesFile.close();
-          }*/
-
-
-          /*deleteProductFromFile("television.txt", 4);*/
-
-
-          //vector<Television*> products = readData<Television>("television.txt");
-
-          // Modify the name of the product at index 2
-       /*   modifyAttribute(products, 2, 0, "NEW NAME");
-          writeData(products, "television.txt");*/
-
-
-          /* for (const auto& product : products) {
-               cout << "Name: " << product->getName() << endl;
-               cout << "Price: " << product->getPrice() << endl;
-               cout << "Description: " << product->getDescription() << endl;
-               cout << "Model: " << product->getModel() << endl;
-               cout << "Screen Size: " << product->getScreenSize() << endl;
-           }*/
-
-           /* for (const auto& product : dataa) {
-                cout << "Name: " << product->getName() << endl;
-                cout << "Price: " << product->getPrice() << endl;
-                cout << "Description: " << product->getDescription() << endl;
-                cout << "Model: " << product->getModel() << endl;
-                cout << "Camera: " << product->getcameraQuality() << endl;
-            }*/
-
-            /*
-              for (Television* tv : products) {
-                  delete tv;
-              }*/
-              /* store.printProducts();*/
-           //
-           //cout << "**********************************************" << endl;
-           //cout << "*                  WELCOME                   *" << endl;
-           //cout << "*           TO MY AWESOME STORE!             *" << endl;
-           //cout << "*                                            *" << endl;
-           //cout << "**********************************************" << endl;
-           //cout << endl;
 
     //string password, userName;
     //cout << "User name:" << endl;
@@ -308,7 +163,7 @@ int main()
 
     cout << "**********************************************" << endl;
     cout << "*                  WELCOME                   *" << endl;
-    cout << "*           TO MY AWESOME STORE!             *" << endl;
+    cout << "*           TO ELECTRONIC STORE!             *" << endl;
     cout << "*                                            *" << endl;
     cout << "**********************************************" << endl;
     cout << endl;
@@ -322,8 +177,13 @@ int main()
         cout << "4. Add Product" << endl;
         cout << "5. Exit" << endl;
         cout << "Enter your choice: ";
-        cin >> choice;
-
+        if (!(cin >> choice)) {
+            cout << "Invalid input. Please enter an integer." << endl;
+            // Clear the input stream
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
         switch (choice) {
         case 1: {
             cout << "Choose the product group to display:" << endl;
@@ -331,8 +191,13 @@ int main()
             cout << "2. Phones" << endl;
             cout << "Enter your choice: ";
             int productGroup;
-            cin >> productGroup;
-
+            
+            if (!(cin >> productGroup)) {
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
             if (productGroup == 1) {
                 vector<Television*> televisions = readData<Television>("television.txt");
                 for (int i = 0; i < televisions.size(); ++i) {
@@ -374,7 +239,16 @@ int main()
             cout << "2. Phones" << endl;
             cout << "Enter your choice: ";
             int productGroup;
-            cin >> productGroup;
+            if (!(cin >> productGroup)) {
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            };
+            while (productGroup < 0 || productGroup >= 2) {
+                cout << "Invalid index. Please enter a value from 1 to  2 : ";
+                cin >> productGroup;
+            }
 
             if (productGroup == 1) {
                 vector<Television*> televisions = readData<Television>("television.txt");
@@ -397,15 +271,33 @@ int main()
                 cout << "Enter the index of the product to modify: ";
                 cin >> index;
                 index -= 1;
+
+                // Prompt until a valid index is entered
+                while (index < 0 || index >= televisions.size()) {
+                    cout << "Invalid index. Please enter a value from 1 to " << televisions.size() << ": ";
+                    cin >> index;
+                    index -= 1;
+                }
+      
                 cout << "Enter the attribute index to modify: "<<endl<<" 1.Name; " << endl << " 2.Price; " << endl << " 3.Description; " << endl << " 4.Model; " << endl << " 5.Screen size; ";
                 cin >> attributeIndex;
+                attributeIndex -= 1;
+
+                // Prompt until a valid index is entered
+                while (attributeIndex < 0 || attributeIndex >= 5) {
+                    cout << "Invalid index. Please enter a value from 1 to 5 : ";
+                    cin >> attributeIndex;
+                    index -= 1;
+                }
                 cout << "Enter the new value: ";
                 cin.ignore();
                 getline(cin, newValue);
-                attributeIndex -= 1;
                 modifyAttribute(televisions, index, attributeIndex, newValue);
                 writeData(televisions, "television.txt");
             }
+
+
+
             else if (productGroup == 2) {
                 vector<Phone*> phones = readData<Phone>("phones.txt");
                 // Display the phones for user to choose from
@@ -425,11 +317,36 @@ int main()
                 int index, attributeIndex;
                 string newValue;
                 cout << "Enter the index of the product to modify: ";
-                cin >> index;
+               
+                if (!(cin >> index)) {
+                    cout << "Invalid input. Please enter an integer." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    continue;
+                }
                 index -= 1;
+
+                // Prompt until a valid index is entered
+                while (index < 0 || index >= phones.size()) {
+                    cout << "Invalid index. Please enter a value from 1 to " << phones.size() << ": ";
+                    cin >> index;
+                    index -= 1;
+                }
                 cout << "Enter the attribute index to modify: " << endl << " 1.Name; " << endl << " 2.Price; " << endl << " 3.Description; " << endl << " 4.Model; " << endl << " 5.Camera quality; ";
-                cin >> attributeIndex;
+                
+
+                if (!(cin >> attributeIndex)) {
+                    cout << "Invalid input. Please enter an integer." << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    continue;
+                }
                 attributeIndex -= 1;
+                while (attributeIndex < 0 || attributeIndex >= 5) {
+                    cout << "Invalid index. Please enter a value from 1 to 5 : ";
+                    cin >> attributeIndex;
+                    index -= 1;
+                }
                 cout << "Enter the new value: ";
                 cin.ignore();
                 getline(cin, newValue);
@@ -449,89 +366,119 @@ int main()
             cout << "2. Phones" << endl;
             cout << "Enter your choice: ";
             int productGroup;
-            cin >> productGroup;
-
+            if (!(cin >> productGroup)) {
+                cout << "Invalid input. Please enter an integer." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            };
             if (productGroup == 1) {
                 vector<Television*> televisions = readData<Television>("television.txt");
-                // Display the televisions for user to choose from
-                for (int i = 0; i < televisions.size(); ++i) {
-                    const auto& product = televisions[i];
-                    cout << i + 1 << ". "
-                        << "Name: " << product->getName() << endl
-                        << "Price: " << product->getPrice() << endl
-                        << "Description: " << product->getDescription() << endl
-                        << "Model: " << product->getModel() << endl
-                        << "Screen Size: " << product->getScreenSize() << endl
-                        << endl;
-                    cout << endl;
-                };
-
-                int index;
-                cout << "Enter the index of the product to delete: ";
-                cin >> index;
-
-                if (index >= 0 && index < televisions.size()) {
-                    deleteProductFromFile("television.txt", index + 1);
-                    // Delete the object from memory
-                    delete televisions[index];
-                    televisions.erase(televisions.begin() + index);
-                    cout << "Product deleted successfully!" << endl;
+                if (televisions.empty()) {
+                    cout << "There are no products to delete." << endl;
                 }
                 else {
-                    cout << "Invalid index!" << endl;
-                }
+                    // Display the televisions for user to choose from
+                    for (int i = 0; i < televisions.size(); ++i) {
+                        const auto& product = televisions[i];
+                        cout << i + 1 << ". "
+                            << "Name: " << product->getName() << endl
+                            << "Price: " << product->getPrice() << endl
+                            << "Description: " << product->getDescription() << endl
+                            << "Model: " << product->getModel() << endl
+                            << "Screen Size: " << product->getScreenSize() << endl
+                            << endl;
+                        cout << endl;
+                    };
 
-                writeData(televisions, "television.txt");
+                    int index;
+                    cout << "Enter the index of the product to delete: ";
+                    if (!(cin >> index)) {
+                        cout << "Invalid input. Please enter an integer." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        continue;
+                    }
+                    index -= 1;
+
+
+                    if (index >= 0 && index < televisions.size()) {
+                        deleteProductFromFile("television.txt", index + 1);
+                        // Delete the object from memory
+                        delete televisions[index];
+                        televisions.erase(televisions.begin() + index);
+                        cout << "Product deleted successfully!" << endl;
+                    }
+                    else {
+                        cout << "Invalid index!" << endl;
+                    }
+
+                    writeData(televisions, "television.txt");
+                }
             }
+
             else if (productGroup == 2) {
                 vector<Phone*> phones = readData<Phone>("phones.txt");
                 // Display the phones for user to choose from
-
-                for (int i = 0; i < phones.size(); ++i) {
-                    const auto& product = phones[i];
-                    cout << i + 1 << ". "
-                        << "Name: " << product->getName() << endl
-                        << "Price: " << product->getPrice() << endl
-                        << "Description: " << product->getDescription() << endl
-                        << "Model: " << product->getModel() << endl
-                        << "Camera quality: " << product->getcameraQuality() << endl
-                        << endl;
-                    cout << endl;
-                }
-
-                int index;
-                cout << "Enter the index of the product to delete: ";
-                cin >> index;
-
-                if (index >= 0 && index < phones.size()) {
-                    deleteProductFromFile("phones.txt", index + 1);
-                    // Delete the object from memory
-                    delete phones[index];
-                    phones.erase(phones.begin() + index);
-                    cout << "Product deleted successfully!" << endl;
+                if (phones.empty()) {
+                    cout << "There are no products to delete." << endl;
                 }
                 else {
-                    cout << "Invalid index!" << endl;
-                }
+                    for (int i = 0; i < phones.size(); ++i) {
+                        const auto& product = phones[i];
+                        cout << i + 1 << ". "
+                            << "Name: " << product->getName() << endl
+                            << "Price: " << product->getPrice() << endl
+                            << "Description: " << product->getDescription() << endl
+                            << "Model: " << product->getModel() << endl
+                            << "Camera quality: " << product->getcameraQuality() << endl
+                            << endl;
+                        cout << endl;
+                    }
 
-                writeData(phones, "phones.txt");
+                    int index;
+                    cout << "Enter the index of the product to delete: ";
+                    if (!(cin >> index)) {
+                        cout << "Invalid input. Please enter an integer." << endl;
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        continue;
+                    }
+                    index--;
+
+                    if (index >= 0 && index < phones.size()) {
+                        deleteProductFromFile("phones.txt", index + 1);
+                        // Delete the object from memory
+                        delete phones[index];
+                        phones.erase(phones.begin() + index);
+                        cout << "Product deleted successfully!" << endl;
+                    }
+                    else {
+                        cout << "Invalid index!" << endl;
+                    }
+
+                    writeData(phones, "phones.txt");
+                }
             }
             else {
                 cout << "Invalid product group!" << endl;
             }
+        
 
             break;
         }case 4: {
             cout << "Choose the product group to add to:" << endl;
-            int whatType;
+            string whatType;
            cout << "What type of product do you want to add?" << endl <<"1.Television"<< endl << "2.Phone"<<endl;
             cout << "Enter your choice: ";
             cin >> whatType;
+            check(whatType);
+            cin.ignore();
 
            
 
 
-           if (whatType == 1) {
+            if (whatType == "1") {
 
                ofstream TelevisionFile("television.txt", ios_base::app);
 
@@ -545,7 +492,8 @@ int main()
 
                cout << "Enter the price of product : ";
                getline(cin, price);
-
+               check(price);
+                cin.ignore();
                cout << "Enter the description of product : ";
                getline(cin, description);
 
@@ -554,7 +502,7 @@ int main()
 
                cout << "Enter the screen size of product : ";
                getline(cin, screenSize);
-
+               
                t.setName(name);
                t.setPrice(price);
                t.setDescription(description);
@@ -565,7 +513,7 @@ int main()
 
                TelevisionFile.close();
            }
-           else if (whatType == 2) {
+            else if (whatType == "2") {
 
                ofstream PhonesFile("phones.txt", ios_base::app);
               
@@ -578,7 +526,8 @@ int main()
 
                cout << "Enter the price of product : ";
                getline(cin, price);
-
+               check(price);
+               cin.ignore();
                cout << "Enter the description of product : ";
                getline(cin, description);
 
