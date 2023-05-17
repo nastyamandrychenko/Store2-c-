@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Authorization.cpp" />
+    <ClCompile Include="Func.cpp" />
     <ClCompile Include="Phone.cpp" />
     <ClCompile Include="Product.cpp" />
     <Resource Include="phones.txt">
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Authorization.h" />
+    <ClInclude Include="Func.h" />
     <ClInclude Include="Phone.h" />
     <ClInclude Include="Product.h" />
     <ClInclude Include="Television.h" />
