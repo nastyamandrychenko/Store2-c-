@@ -26,6 +26,7 @@ public:
 
     virtual string getAdditionalAttribute() const = 0;
     virtual void setAdditionalAttribute(const string& attributeValue) = 0;
+    virtual string getNameOfAttr() const = 0;
 };
 
 #endif

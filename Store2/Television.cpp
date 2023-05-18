@@ -19,3 +19,6 @@ string Television::getAdditionalAttribute() const {
 void Television::setAdditionalAttribute(const string& attributeValue) {
     screenSize = attributeValue;
 };
+string Television::getNameOfAttr() const  {
+    return "Screen Size: ";
+}

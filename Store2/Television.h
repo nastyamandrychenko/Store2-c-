@@ -17,7 +17,7 @@ public:
     void setScreenSize(string screenS);
     string getAdditionalAttribute() const override;
     void setAdditionalAttribute(const string& attributeValue) override;
-
+    string getNameOfAttr() const  override;
    
 };
 #endif

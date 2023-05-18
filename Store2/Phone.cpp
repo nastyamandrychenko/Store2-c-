@@ -21,3 +21,6 @@ string Phone::getAdditionalAttribute() const {
 void Phone::setAdditionalAttribute(const string& attributeValue) {
     cameraQuality = attributeValue;
 }
+string  Phone::getNameOfAttr() const {
+    return "Camera Quality: ";
+}
