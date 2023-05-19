@@ -134,7 +134,7 @@ void displayProducts(const vector<T*>& products) {
         cout << "--------------------------" << endl;
         cout << i + 1 << ". "
             << "Name: " << product->getName() << endl
-            << "Price: " << product->getPrice() << endl
+            << "Price: " << product->getPrice()<< "$" << endl
             << "Description: " << product->getDescription() << endl
             << "Model: " << product->getModel() << endl
         << product->getNameOfAttr() << product->getAdditionalAttribute() << endl;

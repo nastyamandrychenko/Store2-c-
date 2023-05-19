@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include  <sstream>
+
 using namespace std;
 
 template <typename T>
@@ -69,12 +70,10 @@ public:
             }
         }
     };
-    vector<pair<T*, int>> getProductsCart() const {
-        return productsCart;
-    };
+   
    
     
-    void decreaseQuantity(int index, int quantity) {
+    void addProductToCart(int index, int quantity) {
         if (index < 0 || index > productsCart.size()) {
             cout << "Invalid index. Please enter a valid index from the cart." << endl;
             return;
@@ -99,7 +98,56 @@ public:
     bool ifEmpty() const {
         return productsCart.empty();
     };
+    void clearCart() {
+        productsCart.clear();
+        totalPrice = 0.0;
+        totalQuantity = 0;
+    }
  
+};
+
+bool solveArithmeticProblems() {
+    // Seed the random number generator
+    srand(static_cast<unsigned int>(time(nullptr)));
+    bool giveMoney;
+        // Generate two random numbers between 1 and 100
+        int num1 = rand() % 100 + 1;
+        int num2 = rand() % 100 + 1;
+
+        int correctAnswer = num1 + num2;
+
+        cout << num1 << " + " << num2 << " = ";
+
+        int userAnswer = getValidNumberInput("");
+
+        if (userAnswer == correctAnswer) {
+            giveMoney = true;
+            return giveMoney;
+        }
+        else {
+            giveMoney = false;
+            return giveMoney;
+        }
+}
+
+class Wallet {
+    double walletBalance;
+public:
+    Wallet(double wallet_) : walletBalance(wallet_) {};
+
+    void setWalletBalance(double num) {
+        walletBalance = num;
+    };
+    double getWalletBalance() {
+        return walletBalance;
+    };
+    void addToWalletBalance(double add) {
+         walletBalance += add;
+    };
+    void removeFromWalletBalance(double remove) {
+        walletBalance -= remove;
+    };
+
 };
 
 int main()
@@ -112,22 +160,9 @@ int main()
     cout << "**********************************************" << endl;
     cout << endl;
 
-    //string password, userName;
-    //cout << "User name:" << endl;
-    //cin >> userName;
-    //cout << "Password:" << endl;
-    //cin >> password;
-    //Authorization logIn(password, userName);
-
-    //if (logIn.checkLogIn(userName, password) == true) {
-    //    cout << "Login was successful!";
-    //}
-    //else {
-    //    cout << "Wrong password or username! Try again!";
-    //    return 0; // Exit the program if login fails
-    //}
-
+   
     Cart<Product> cart;
+    Wallet wallet(100);
 
     int whichPart, choice;
     while (true) {
@@ -141,52 +176,68 @@ int main()
 
         switch (whichPart) {
         case 1: {
-            while (true) {
-                // Administrator
-                cout << "Menu Options:" << endl;
-                cout << "1. Display All Products" << endl;
-                cout << "2. Modify Product" << endl;
-                cout << "3. Delete Product" << endl;
-                cout << "4. Add Product" << endl;
-                cout << "5. Exit" << endl;
+            string password, userName;
+            cout << "User name:" << endl;
+            cin >> userName;
+            cout << "Password:" << endl;
+            cin >> password;
+            Authorization logIn(password, userName);
 
-                choice = getValidNumberInput("Enter your choice: ");
-                switch (choice) {
-                case 1: {
-                    displayProducts();
-                    cout << endl;
-                    break;
+            if (logIn.checkLogIn(userName, password) == true) {
+                cout << "Login was successful!";
+                while (true) {
+                    // Administrator
+                    cout << "Menu Options:" << endl;
+                    cout << "1. Display All Products" << endl;
+                    cout << "2. Modify Product" << endl;
+                    cout << "3. Delete Product" << endl;
+                    cout << "4. Add Product" << endl;
+                    cout << "5. Exit" << endl;
+
+                    choice = getValidNumberInput("Enter your choice: ");
+                    switch (choice) {
+                    case 1: {
+                        displayProducts();
+                        cout << endl;
+                        break;
+                    }
+                    case 2: {
+                        modifyProduct();
+                        cout << endl;
+                        break;
+                    }
+                    case 3: {
+                        deleteProduct();
+                        cout << endl;
+                        break;
+                    }case 4: {
+                        addProduct();
+                        cout << endl;
+                        break;
+                    }
+                    case 5: {
+                        std::cout << "Returning to the main menu..." << std::endl;
+                        cout << endl;
+                        break;
+                    }
+                    default: {
+                        std::cout << "Invalid choice. Please select a valid option." << std::endl;
+                        cout << endl;
+                        break;
+                    }
+                    }
+                    if (choice == 5) {
+                        break;
+                    }
                 }
-                case 2: {
-                    modifyProduct();
-                    cout << endl;
-                    break;
-                }
-                case 3: {
-                    deleteProduct();
-                    cout << endl;
-                    break;
-                }case 4: {
-                    addProduct();
-                    cout << endl;
-                    break;
-                }
-                case 5: {
-                    std::cout << "Returning to the main menu..." << std::endl;
-                    cout << endl;
-                    break;
-                }
-                default: {
-                    std::cout << "Invalid choice. Please select a valid option." << std::endl;
-                    cout << endl;
-                    break;
-                }
-                }
-                if (choice == 5) {
-                    break;
-                }
+                break;
+            }
+            else {
+                cout << "Wrong password or username! Try again!";
+                continue; // Go back to the menu options
             }
             break;
+           
         }case 2: {
 
             int productChoice;
@@ -197,7 +248,10 @@ int main()
                 cout << "2. Add Product to Cart" << endl;
                 cout << "3. Display Cart" << endl;
                 cout << "4. Delete Products from Cart" << endl;
-                cout << "5. Back to Main Menu" << endl;
+                cout << "5. Wallet" << endl;
+                cout << "6. To make a purchase" << endl;
+                cout << "7. Back to Main Menu" << endl;
+       
                 choice = getValidNumberInput("Enter your choice: ");
                 cout << endl;
                 switch (choice) {
@@ -223,7 +277,6 @@ int main()
                             Television* selectedTV = televisions[productChoice];
                             int quantity = getValidNumberInput("Enter the quantity to add: ");
                             cart.addToCart(selectedTV, quantity);
-
                         }
                         else {
                             cout << endl;
@@ -255,7 +308,7 @@ int main()
                         cout << endl;
                     }
                     else {
-                        cout << "Invalid choice. Please select a valid option." << endl;
+                        cout << "Invalid choice." << endl;
                     }
 
 
@@ -285,18 +338,90 @@ int main()
                             cart.displayCart();
                             int deleteCartProduct = getValidNumberInput("Enter the index of the product you want to remove from the cart: ");
                             deleteChoice--;
-                            cart.decreaseQuantity(deleteChoice, 1);
+                            cart.addProductToCart(deleteChoice, 1);
+                        }
+                        else if(deleteChoice == 2)
+                        {
+                            cart.clearCart();
+                            cout << "Cart cleared successfully" << endl;
+                        }
+                        else {
+                            cout << "Invalid choice. " << endl;
                         }
                         cout << endl;
                     }
+                    break;
                 }case 5: {
+                    cout << "1. My balance" << endl;
+                    cout << "2. Get some money" << endl;
+                    int walletChoice = getValidNumberInput("Enter the index: ");
+                    cout << endl;
+                    if (walletChoice == 1) {
+                        cout << wallet.getWalletBalance() << "$ in your account" << endl;
+                        cout << endl;
+                    }
+                    else if (walletChoice == 2) {
+                        cout <<"Answer the question to get $50" << endl;
+                        cout << endl;
+                        bool answer = solveArithmeticProblems();
+                        if (answer == true) {
+                            wallet.addToWalletBalance(50);
+                            cout << "Good job! You got $50! Check your balance." << endl;
+                            cout << endl;
+                        }
+                        else {
+                            cout << "Incorrect answer! You don't get 50!" << endl;
+                            cout << endl;
+                        }
+
+                    }
+                    break;
+
+                }
+                case 6: {
+                    cout << "--------------------Welcome to the ordering system!--------------------" << endl;
+                    if (cart.ifEmpty()) {
+                        cout << "Your basket is empty. Add products to make a purchase" << endl;
+                        break;
+                    }
+                    else {
+                        cart.displayCart();
+                        string yesNo;
+                        cout << "Are you sure you want to order these products? y/n" << endl;
+                        cin.ignore();
+                        getline(cin, yesNo);
+                        if (yesNo == "y")
+                        {
+                            if (wallet.getWalletBalance() < cart.getTotPrice()) {
+                                cout << " Order cancelled. Not enough money in the account!" << endl;
+                                break;
+                            }
+                            else {
+                                cout << "Order processed successfully. Thank you for your purchase!" << endl;
+                                cart.clearCart();
+                                double totPrice = cart.getTotPrice();
+                                wallet.removeFromWalletBalance(totPrice);
+                            };
+
+                        }
+                        else if (yesNo == "n") {
+                            break;
+                        }
+                        else {
+                            cout << "Invalid choice. " << endl;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case 7: {
                     break;
                 }
                        
                 }
-                if (choice == 5) {
+                if (choice == 7) {
                     cout << endl;
-                    std::cout << "Returning to the main menu..." << std::endl;
+                    cout << "Returning to the main menu..." << endl;
                     break;  // Break out of the inner while loop
                 }
             }
