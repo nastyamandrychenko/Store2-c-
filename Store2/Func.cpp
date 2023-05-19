@@ -275,7 +275,10 @@ void addProduct() {
     cout << "What type of product do you want to add?" << endl << "1.Television" << endl << "2.Phone" << endl;
     cout << "Enter your choice: ";
     cin >> whatType;
-    check(whatType);
+    while (!isInteger(whatType)) {
+        cout << "Invalid price! Please enter an integer value: ";
+        getline(cin, whatType);
+    };
     cin.ignore();
 
 
