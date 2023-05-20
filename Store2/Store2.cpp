@@ -27,7 +27,7 @@ int main()
     cout << endl;
 
     Cart<Product> cart;
-
+    Wallet wallet(100);
    
 
     int whichPart, choice;
@@ -139,12 +139,12 @@ int main()
                     deleteFromCart(cart);
                     break;
                 }case 5: {
-                    checkWallet(cart);
+                    checkWallet(cart,wallet);
                     break;
 
                 }
                 case 6: {
-                   
+                    takeAnOrder(cart,wallet);
                     break;
                 }
                 case 7: {

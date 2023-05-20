@@ -66,7 +66,7 @@ template <typename T>
 
 
     template <typename T>
-    void Cart<T>::addProductToCart(int index, int quantity) {
+    void Cart<T>::deleteFromCart(int index, int quantity) {
         if (index < 0 || index > productsCart.size()) {
             cout << "Invalid index. Please enter a valid index from the cart." << endl;
             return;

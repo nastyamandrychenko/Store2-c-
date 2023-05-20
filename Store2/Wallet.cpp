@@ -10,5 +10,5 @@ void Wallet::addToWalletBalance(double add) {
     walletBalance += add;
 };
 void Wallet::removeFromWalletBalance(double remove) {
-    walletBalance -= remove;
+    walletBalance = walletBalance - remove;
 };

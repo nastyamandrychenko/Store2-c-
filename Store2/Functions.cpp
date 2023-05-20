@@ -12,9 +12,8 @@
 #include "Wallet.h"
 using namespace std;
 
-Wallet wallet(100);
 
-void takeAnOrder(Cart<Product>& cart) {
+void takeAnOrder(Cart<Product>& cart, Wallet& wallet) {
     cout << "--------------------Welcome to the ordering system!--------------------" << endl;
     if (cart.ifEmpty()) {
         cout << "Your basket is empty. Add products to make a purchase" << endl;
@@ -32,9 +31,10 @@ void takeAnOrder(Cart<Product>& cart) {
             }
             else {
                 cout << "Order processed successfully. Thank you for your purchase!" << endl;
-                cart.clearCart();
                 double totPrice = cart.getTotPrice();
                 wallet.removeFromWalletBalance(totPrice);
+                cart.clearCart();
+                
             };
 
         }
@@ -46,7 +46,7 @@ void takeAnOrder(Cart<Product>& cart) {
     }
 }
 
-void checkWallet(Cart<Product>& cart) {
+void checkWallet(Cart<Product>& cart, Wallet& wallet) {
     cout << "1. My balance" << endl;
     cout << "2. Get some money" << endl;
     int walletChoice = getValidNumberInput("Enter the index: ");
@@ -88,8 +88,8 @@ void deleteFromCart(Cart<Product>& cart) {
         if (deleteChoice == 1) {
             cart.displayCart();
             int deleteCartProduct = getValidNumberInput("Enter the index of the product you want to remove from the cart: ");
-            deleteChoice--;
-            cart.addProductToCart(deleteChoice, 1);
+            deleteCartProduct--;
+            cart.deleteFromCart(deleteChoice, 1);
         }
         else if (deleteChoice == 2)
         {

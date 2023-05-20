@@ -20,7 +20,7 @@ public:
     void addToCart(T* product, int quantity);
     double getTotPrice();
     void displayCart();
-    void addProductToCart(int index, int quantity);
+    void deleteFromCart(int index, int quantity);
     bool ifEmpty() const;
     void clearCart();
 };

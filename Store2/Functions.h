@@ -15,5 +15,6 @@ using namespace std;
 
 void addToCart(Cart<Product>& cart);
 void deleteFromCart(Cart<Product>& cart);
-void checkWallet(Cart<Product>& cart);
+void checkWallet(Cart<Product>& cart, Wallet& wallet);
+void takeAnOrder(Cart<Product>& cart, Wallet& wallet);
 #endif

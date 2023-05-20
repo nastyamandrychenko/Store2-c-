@@ -10,4 +10,3 @@ sddasd,2332,sdffsd,sdffs,22x44
 sfsfd,33,sdfsd,sddf,33x55
 sdf,33,fsddf,dfsfd,fsd
 fsdfs,33,asds,dsads,22z44
-dfsdf,255,dsaf,dsad,33x33
