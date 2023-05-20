@@ -147,4 +147,5 @@ int getValidNumberInput(const std::string& prompt);
 void deleteProduct();
 void addProduct();
 bool isInteger(const string& s);
+bool solveArithmeticProblems();
 #endif

@@ -368,3 +368,26 @@ void addProduct() {
         cout << "Invalid product group!" << endl;
     }
 }
+bool solveArithmeticProblems() {
+    // Seed the random number generator
+    srand(static_cast<unsigned int>(time(nullptr)));
+    bool giveMoney;
+    // Generate two random numbers between 1 and 100
+    int num1 = rand() % 100 + 1;
+    int num2 = rand() % 100 + 1;
+
+    int correctAnswer = num1 + num2;
+
+    cout << num1 << " + " << num2 << " = ";
+
+    int userAnswer = getValidNumberInput("");
+
+    if (userAnswer == correctAnswer) {
+        giveMoney = true;
+        return giveMoney;
+    }
+    else {
+        giveMoney = false;
+        return giveMoney;
+    }
+}
